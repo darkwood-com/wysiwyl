@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/matyo91/wysiwyl">
+    <img src="images/logo.png" width="auto" height="128px" alt="Flow">
+  </a>
+</p>
+
 # wysiwyl
 
 What you see is what you like
