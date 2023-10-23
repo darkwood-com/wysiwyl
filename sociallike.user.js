@@ -5,6 +5,8 @@
 // @description  What you see is what you like
 // @author       matyo91
 // @match        https://*.twitter.com/*
+// @match        https://odysee.com/*
+// @match        https://www.youtube.com/*
 // @license      MIT
 // ==/UserScript==
 
@@ -15,7 +17,11 @@
 
     var functions = {
         likeClick() {
-            document.querySelectorAll('[role="button"][data-testid="like"]').forEach((e) => {e.click()})
+            document.querySelectorAll([
+                '[role="button"][data-testid="like"]', // twitter
+                '.section.file-page__video button.button-like:not(.button--fire)', // odysee
+                '#below #segmented-like-button button[aria-pressed="false"]', // youtube
+            ].join(', ')).forEach((e) => {e.click()})
         },
         like() {
             functions.likeClick()
