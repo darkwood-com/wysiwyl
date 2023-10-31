@@ -8,6 +8,7 @@
 // @match        https://odysee.com/*
 // @match        https://www.youtube.com/*
 // @match        https://github.com/*
+// @match        https://www.esa.int/*
 // @license      MIT
 // ==/UserScript==
 
@@ -35,6 +36,7 @@
                 '.file-page__video button.button-like:not(.button--fire)', // odysee
                 '#below #segmented-like-button button[aria-pressed="false"]', // youtube
                 '.js-social-container:not(.on) .unstarred .js-social-form .btn.btn-sm:not(.btn-primary)', // github
+                '.share button:not(.active)' // esa
             ].join(', '))).flat().reduce((acc, nodeList) => acc.concat([...nodeList]), [])
         },
         readSelector() {
@@ -43,6 +45,7 @@
                 '.file-page__video', // odysee
                 '#primary-inner', // youtube
                 '.js-repo-pjax-container', // github
+                '.article' // esa
             ].join(', '))
         },
         like() {
