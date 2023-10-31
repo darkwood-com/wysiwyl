@@ -4,9 +4,10 @@
 // @version      v0.0.1
 // @description  What you see is what you like
 // @author       matyo91
-// @match        https://*.twitter.com/*
+// @match        https://twitter.com/*
 // @match        https://odysee.com/*
 // @match        https://www.youtube.com/*
+// @match        https://github.com/*
 // @license      MIT
 // ==/UserScript==
 
@@ -33,6 +34,7 @@
                 '[role="button"][data-testid="like"]', // twitter
                 '.file-page__video button.button-like:not(.button--fire)', // odysee
                 '#below #segmented-like-button button[aria-pressed="false"]', // youtube
+                '.js-social-container:not(.on) .unstarred .js-social-form .btn.btn-sm:not(.btn-primary)', // github
             ].join(', '))).flat().reduce((acc, nodeList) => acc.concat([...nodeList]), [])
         },
         readSelector() {
@@ -40,6 +42,7 @@
                 'article', // twitter
                 '.file-page__video', // odysee
                 '#primary-inner', // youtube
+                '.js-repo-pjax-container', // github
             ].join(', '))
         },
         like() {
