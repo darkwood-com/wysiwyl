@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:og="http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+        <link rel="manifest" href="/site.webmanifest?v=2">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#5bbad5">
+        <link rel="shortcut icon" href="/favicon.ico?v=2">
+        <meta name="apple-mobile-web-app-title" content="wysiwyl">
+        <meta name="application-name" content="wysiwyl">
+        <meta name="msapplication-TileColor" content="#ee3737">
+        <meta name="theme-color" content="#ee3737">
+
+        <meta name="slack-app-id" content="AP0Q2FLEB">
+
+        {% block seo %}
+            {{ include('_seo.html.twig') }}
+        {% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('style.css') }}">
+        <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+        {% block stylesheets %}{% endblock %}
+
+        {% if 'production' == bugsnag_release_stage and bugsnag_api_key is not empty %}
+            <script src="{{ asset('js/bugsnag.min.js') }}"></script>
+            <script nonce="{{ csp_nonce('script') }}">
+                Bugsnag.start({
+                    apiKey: '{{ bugsnag_api_key }}',
+                    autoTrackSessions: false,
+                    collectUserIp: false,
+                    redactedKeys: [
+                        /^password$/i,
+                        /^token$/i,
+                        /^state$/i,
+                    ]
+                });
+            </script>
+        {% endif %}
+    </head>
+    <body>
+
+        <header class="header">
+            <div class="home-menu pure-menu pure-menu-horizontal">
+                <div class="pure-menu-heading">
+                    <a href="{{ path('homepage') }}">
+                        <div class="logo-wrapper">
+                            <img src="{{ asset('images/logo' ~ (spoilInProgress is defined ? '-spoiler' : '') ~ '.png') }}" alt="wysiwyl" />
+                        </div>
+                        <div>
+                            <div class="site-brand">
+                                wysiwyl
+                            </div>
+                            <div class="site-headline">
+                                Share the Christmas spirit<br/>with your team
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a class="pure-menu-link" href="{{ path('hall_of_fame') }}"><i class="fas fa-star"></i> Hall of Fame</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a class="pure-menu-link" href="{{ path('faq') }}"><i class="fas fa-question"></i> Help</a>
+                    </li>
+                    <li class="pure-menu-item">
+                        <a target="_blank" rel="noreferrer" class="pure-menu-link" href="https://github.com/darkwood/wysiwyl/"><i class="fab fa-github"></i> Star us on GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock content %}
+
+            <footer class="footer is-center {% block footerClass %}{% endblock %}">
+                {% block contact %}
+                    <a href="{{ path('faq') }}" class="support-link"><i class="fas fa-life-ring"></i> Need help?</a>
+                    <a href="mailto:hello@wysiwyl.team" class="support-link"><i class="far fa-envelope"></i> Contact us!</a>
+                {% endblock contact %}
+                <p>
+                    This free service to share the santa spirit is made with ♥ by <a href="https://darkwood.com">Darkwood</a>.
+                    <br>
+                    Hosted gracefully by the awesome people at <a href="https://www.clever-cloud.com/">Clever Cloud</a>.
+                    <br>
+                    Logo lovely crafted by <a href="https://twitter.com/coucou__alex">Alexandre Godreau</a>.
+                    <br>
+                    Emoji provided by <a href="https://www.emojione.com/">Emoji One</a>.
+                    <br>
+                    Sharing gifts since 2015.
+                </p>
+                <p>
+                    <a href="{{ path('terms') }}">Terms of Service</a>
+                    and
+                    <a href="{{ path('privacy_policy') }}">Privacy Policy</a>
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>

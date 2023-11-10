@@ -1,0 +1,135 @@
+{% extends 'santa/base.html.twig' %}
+
+{% set step = 4 %}
+
+{% block santa_content %}
+    <div class="content result-block">
+        {% if wysiwyl.isDone %}
+            <div class="is-center run-block">
+                <h2>Well done! All messages were sent, happy gifting!</h2>
+
+                <p>
+                    We have also sent you an <strong>additional private message</strong> explaining
+                    <strong>how to retrieve the wysiwyl repartition</strong>.
+                </p>
+                <p>
+                    Please note that we do not store anything so this message will be your only way
+                    to retrieve the association.
+                </p>
+                <p>
+                    But unless you want to break wysiwyl magic, you should probably not try it 😇.
+                </p>
+            </div>
+        {% else %}
+            <h2>😱 All the messages are not sent yet, please read carefully</h2>
+
+            <div class="result-error">
+                <p>
+                    Sometimes, even Santa runs into problems when doing his job. But keep reading, everything is not lost!
+                </p>
+
+                <h3>We need you to send the remaining messages</h3>
+
+                <p>
+                    Here is the list of users that didn't receive their wysiwyl message <strong>yet</strong> (click <button id="reveal" class="">here</button> to reveal the receivers):
+                </p>
+
+                <ul>
+                    {% for giver,receiver in wysiwyl.remainingAssociations %}
+                        <li><strong>{{ wysiwyl.user(giver).name|default(wysiwyl.user(giver).identifier) }}</strong> must offer a gift to <strong data-receiver="{{ wysiwyl.user(receiver).name|default(wysiwyl.user(receiver).identifier) }}">xxxxx</strong></li>
+                    {% endfor %}
+                </ul>
+
+                <script type="text/javascript" nonce="{{ csp_nonce('script') }}">
+                    const revealButton = document.getElementById('reveal');
+
+                    revealButton.addEventListener('click', function(e) {
+                        const receivers = document.querySelectorAll('*[data-receiver]');
+
+                        for (let i=0; i<receivers.length; i++) {
+                            receivers[i].innerHTML = receivers[i].getAttribute('data-receiver');
+                        }
+                    }, false);
+                </script>
+
+                <h3>Explanation</h3>
+
+                {% set errors = wysiwyl.uniqueErrors %}
+
+                <p>
+                    For information, here {{ errors|length > 1 ? 'are' : 'is' }} the evil error{{ errors|length > 1 ? 's' }} that caused this failure:
+                </p>
+
+                {% for error in errors %}
+                    <div class="error-code">
+                        {% if loop.length > 1 %}- {% endif %}{{ error|raw }}
+                    </div>
+                {% endfor %}
+
+                {% if wysiwyl.config.application == 'discord' %}
+                    <p>
+                        If a user <strong>does not allow to receive private message on a server</strong>, Discord will prevent us to send
+                        them a message. You need to ask them to <strong>change their privacy settings</strong> on this server.
+                        See <a href="{{ url('faq', {_fragment: 'discord-server-dm'}) }}" target="_blank">our FAQ</a> for more details.
+                        Once they made the change, you can safely retry to send the remaining messages. See below.
+                    </p>
+                {% endif %}
+
+                <p>
+                    Note that errors can also be due to <strong>temporary network problems</strong> when sending messages.
+                    So simply <strong>retrying to send the remaining messages</strong> could fix the problem. See below.
+                </p>
+
+                <h3>Retry to send the remaining message</h3>
+
+                <p>
+                    Please <strong>click the Continue</strong> button below to <strong>safely</strong> inform the remaining users as if nothing happened.
+                </p>
+
+                <div class="is-center">
+                    <a href="{{ path('retry', {hash: wysiwyl.hash}) }}" class="big-button warning-btn" id="retry-button">
+                        <span class="fas fa-redo" aria-hidden="true"></span>
+                        Continue - Send the remaining messages
+                    </a>
+                </div>
+
+                <script type="text/javascript" nonce="{{ csp_nonce('script') }}">
+                    let wysiwylRetried = false;
+
+                    const retryButton = document.getElementById('retry-button');
+
+                    /**
+                     * Prevent the multi-click of the button
+                     */
+                    retryButton.addEventListener('click', function(e) {
+                        if (wysiwylRetried) {
+                            e.preventDefault();
+                        } else {
+                            wysiwylRetried = true;
+                            retryButton.children[0].className = 'fas fa-hourglass-start';
+                        }
+                    }, false);
+                </script>
+
+                <p>
+                    Sorry for the inconvenience. If the retry button did not work, you can still contact them <strong>manually</strong>.
+                    <a href="https://github.com/darkwood/wysiwyl/issues">Let us know too!</a>
+                </p>
+            </div>
+        {% endif %}
+
+        <div class="is-center">
+            <a href="{{ path('homepage') }}" class="big-button">
+                <span class="fas fa-plus" aria-hidden="true"></span>
+                Start another wysiwyl
+            </a>
+        </div>
+
+        <div class="is-center">
+            <a href="{{ path('hall_of_fame') }}" class="big-button">
+                <span class="fas fa-star" aria-hidden="true"></span>
+                Add your company to the Hall of Fame!
+            </a>
+        </div>
+    </div>
+{% endblock santa_content %}

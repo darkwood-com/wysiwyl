@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="content error-page">
+        <div class="is-center">
+            <h2>Error 500</h2>
+
+            <p>Hu... It looks like something didn't work as expected...</p>
+
+            <img class="is-center" alt="Error 500" src="/images/error-500.gif">
+        </div>
+        <div class="is-center">
+            <a href="{{ path('homepage') }}" class="big-button">
+                <span class="fas fa-angle-left" aria-hidden="true"></span>
+                Go back to home page
+            </a>
+
+            <a href="mailto:hello@wysiwyl.team" class="big-button">
+                <span class="far fa-life-ring" aria-hidden="true"></span>
+                Contact support
+            </a>
+        </div>
+    </div>
+{% endblock content %}

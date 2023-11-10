@@ -1,0 +1,66 @@
+name: Continuous Integration
+
+'on':
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
+    schedule:
+        - cron: '0 0 * * MON'
+
+permissions:
+    contents: read
+
+jobs:
+    check-dockerfiles:
+        name: Check Dockerfile
+        runs-on: ubuntu-latest
+        steps:
+        -   name: Checkout
+            uses: actions/checkout@v3
+
+        -   name: Check php/Dockerfile
+            uses: hadolint/hadolint-action@v3.1.0
+            with:
+                dockerfile: tools/env/services/php/Dockerfile
+
+    ci:
+        name: Continuous Integration
+        runs-on: ubuntu-latest
+        env:
+            BUILDKIT_PROGRESS: plain
+            CI: 1
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    tools: darkwood/castor
+
+            -
+                name: 'Build and start the infrastructure'
+                run: 'castor start && sleep 5'
+
+            -
+                name: 'Test HTTP server'
+                run: |
+                    set -e
+                    set -o pipefail
+
+                    curl --fail --insecure --silent -H "Host: wysiwyl.test" https://127.0.0.1 | grep "wysiwyl"
+
+            -
+                name: 'Run PHPUnit'
+                run: castor qa:phpunit
+
+            -
+                name: 'Run PHPStan'
+                run: castor qa:phpstan
+
+            -
+                name: 'Run PHP-CS-Fixer'
+                run: castor qa:cs

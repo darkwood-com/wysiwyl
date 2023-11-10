@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="content error-page">
+        <div class="is-center">
+            <h2>Error 404 - Not found</h2>
+
+            <p>Ho ho ho! The page could not be found.</p>
+
+            <img class="is-center" alt="Error 404" src="/images/error-404.gif">
+        </div>
+        <div class="is-center">
+            <a href="{{ path('homepage') }}" class="big-button">
+                <span class="fas fa-angle-left" aria-hidden="true"></span>
+                Go back to home page
+            </a>
+        </div>
+    </div>
+{% endblock content %}
