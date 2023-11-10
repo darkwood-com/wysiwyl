@@ -1,0 +1,375 @@
+{% extends 'base.html.twig' %}
+
+{% block seo %}
+    {{ include('_seo.html.twig', {
+        title: 'wysiwyl - Frequently asked questions',
+        description: 'Frequently asked questions when using wysiwyl',
+    }) }}
+{% endblock %}
+
+{% block content %}
+    <div class="hall-of-fame">
+        <div class="content-container">
+            <div class="content faq">
+                <h1 class="content-head is-center">Help and Frequently Asked Questions</h1>
+
+                <h2>Privacy</h2>
+
+                <ul>
+                    <li>
+                        <details id="data-collect">
+                            <summary>
+                                <h3>
+                                    <p><a href="#data-collect"><i class="fas fa-link"></i></a>What do you do with the
+                                        data you collect?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                <strong>Short answer</strong>:
+                                Nothing 😚
+                            </p>
+                            <p>
+                                <strong>Detailed answer</strong>:
+                                We receive only the data mandatory to start the wysiwyl:
+                                the list of users and usergroups in your organization.
+                                Everything will be forgotten automatically after you finished the draw!
+                                In fact, we do not even have a database 😮
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="data-retention">
+                            <summary>
+                                <h3>
+                                    <p><a href="#data-retention"><i class="fas fa-link"></i></a>How long do you keep the
+                                        collected data?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                This project do not use a database. Every data is stored only during
+                                the time of your session and will be deleted a few hours after your last
+                                interaction with the application.
+                            </p>
+                        </details>
+                    </li>
+                </ul>
+
+                <h2>Using the app</h2>
+
+                <ul>
+                    <li>
+                        <details id="howto">
+                            <summary>
+                                <h3>
+                                    <p><a href="#howto"><i class="fas fa-link"></i></a>How does it work?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                Once authenticated with your favorite Chat tool, you will be prompted with the User
+                                Selection screen.<br/>
+                                We show you all the users in your team. Just select the ones which will take part to
+                                your
+                                wysiwyl by clicking on their names.<br/>
+                            </p>
+
+                            <div class="is-center">
+                                <img class="img-border" src="{{ asset('images/app-step1.png') }}" style="max-width: 80%"
+                                     alt="The user selection form"/>
+                            </div>
+
+                            <p>
+                                On the second screen, you will be able to customize a bit the message that will be sent
+                                to
+                                every participant.
+                                You can add an optional message that will be sent along the wysiwyl draw. You can
+                                even
+                                add details about every participant to help Santas achieve their mission.
+                            </p>
+
+                            <div class="is-center">
+                                <img class="img-border" src="{{ asset('images/app-step2.png') }}" style="max-width: 80%"
+                                     alt="The customization form"/>
+                            </div>
+
+                            <p>
+                                You can always preview the private message that will be sent with the following button,
+                                that
+                                will send you and only you a fake message:
+                            </p>
+                            <p class="is-center">
+                                <button type="button" class="small-button">
+                                    <span class="fas fa-wrench" aria-hidden="true"></span>
+                                    Send me a fake message
+                                </button>
+                            </p>
+
+                            <p>
+                                Once you are ready, you can submit the wysiwyl by clicking this big red button:
+                            </p>
+                            <div class="is-center">
+                                <button type="submit" class="big-button">
+                                    <span class="fas fa-paper-plane" aria-hidden="true"></span>
+                                    Shuffle and send wysiwyl messages!
+                                </button>
+                            </div>
+                            <p>
+                                This will trigger the following operations:
+                            </p>
+                            <ol>
+                                <li>Shuffle all the users;</li>
+                                <li>Assign a random user to each user, without collision;</li>
+                                <li><strong>Send a private message to each user</strong> with the user they must gift
+                                    and
+                                    your admin message;
+                                </li>
+                                <li>Send a private message to the admin (you) with details.</li>
+                            </ol>
+                            <p>And that's it, you are done!</p>
+                        </details>
+                    </li>
+
+                    <li>
+                        <details id="secret-repartition">
+                            <summary>
+                                <h3>
+                                    <p><a href="#secret-repartition"><i class="fas fa-link"></i></a>How can I retrieve
+                                        the
+                                        secret repartition ?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                As the organizer of the wysiwyl, you will receive a private message that will look
+                                like this :
+                            </p>
+
+                            <div class="is-center">
+                                <img class="img-border" src="{{ asset('images/app-spoil.png') }}"
+                                     style="max-width: 80%"
+                                     alt="Retrieving the repartition"/>
+                            </div>
+
+                            <p>
+                                From there, you can click on
+                                "<a href="{{ path('spoil') }}">this page</a>"
+                                in the message, which will take you to a page where you can paste the long code to
+                                receive the secret repartition.
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="custom-message">
+                            <summary>
+                                <h3>
+                                    <p><a href="#custom-message"><i class="fas fa-link"></i></a>Can I add a custom message for some members ?
+                                    </p>
+                                </h3>
+                            </summary>
+
+                            <p>
+                                Yes! If you need to specify some information for some users in particular (e.g:
+                                allergies, address), you can easily do so! <br/>
+                                On the customization step,
+                                you will see a list of all the participants, and each of them will have a field
+                                next to their name where you can enter the information :
+                            </p>
+
+                            <div class="is-center">
+                                <img class="img-border" src="{{ asset('images/step-notes.png') }}"
+                                     style="max-width: 80%"
+                                     alt="Adding notes to some participants"/>
+                            </div>
+
+                            <p>
+                                The note you write for each member will only be seen by their wysiwyl.
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="odd">
+                            <summary>
+                                <h3>
+                                    <p><a href="#odd"><i class="fas fa-link"></i></a>Will the app work with an odd
+                                        number of participant?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                Don't worry! The draw works perfectly no matter how many participants
+                                you selected (of course we need a minimum of 2 participants 😉).
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="avoid-association">
+                            <summary>
+                                <h3>
+                                    <p><a href="#avoid-association"><i class="fas fa-link"></i></a>Can I make sure
+                                        someone will be matched or not matched with
+                                        someone else?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                No, the association is purely random, so you cannot do that with our application.
+                                An alternative could be to launch 2 wysiwyl with two groups of people.
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="new-participant">
+                            <summary>
+                                <h3>
+                                    <p><a href="#new-participant"><i class="fas fa-link"></i></a>Can I add a new
+                                        participant once messages have been sent?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                No, you can't. However, you can still start a new wysiwyl. We advise you to add a
+                                note
+                                in the
+                                message mentioning that this new draw cancels and replaces the old one.
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="big-team">
+                            <summary>
+                                <h3>
+                                    <p><a href="#big-team"><i class="fas fa-link"></i></a>Will the app work with team
+                                        larger than 500 people?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                The first step in our application is to retrieve all the users on your Slack workspace
+                                / Discord server - yes we retrieve all the users to allow you to select
+                                the
+                                ones that will participate in your wysiwyl.
+                            </p>
+                            <p>
+                                When your team is massive, Slack or Discord API can fail to send us all the
+                                users in a
+                                reasonable duration. That means you will not be able to start a wysiwyl.
+                                A possible workaround would be to create a new Slack workspace / Discord server /
+                                with only the participants.
+                            </p>
+                            <p>
+                                The second step is to dispatch a private message to all the selected users. Even if you
+                                started
+                                a wysiwyl with a lot of participants, the application will send all the messages
+                                progressively.
+                                So there should not be any problem at this step.
+                            </p>
+                        </details>
+                    </li>
+                </ul>
+
+                <h2>Discord</h2>
+
+                <ul>
+                    <li>
+                        <details id="discord-bot-offline" open="">
+                            <summary>
+                                <h3>
+                                    <p><a href="#discord-bot-offline"><i class="fas fa-link"></i></a>Why is the bot always offline?</p>
+                                </h3>
+                            </summary>
+                            <p>The bot is only there to send private message to each participant. You won't interact
+                               with it directly, so it's always offline.</p>
+                            <p>To start a new wysiwyl in a Discord server, just go on <a href="{{ path('homepage') }}">the homepage</a>,
+                               click on "Run on Discord" button, and follow the different steps.</p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="discord-server-dm">
+                            <summary>
+                                <h3>
+                                    <p><a href="#discord-server-dm"><i class="fas fa-link"></i></a>What to do when a
+                                        user does not allow to receive private
+                                        message on a Discord server?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                Discord has an option to allow someone to not receive private message on a their server
+                                they
+                                belong to.
+                            </p>
+                            <p>
+                                If you throw a wysiwyl in a server where a user does not allow to receive private
+                                message,
+                                Discord will prevent us to send them a message. So if you hit this error, you need to
+                                ask
+                                them
+                                to <strong>change their privacy settings</strong> on this server. See the example below:
+                            </p>
+                            <div class="is-center">
+                                <img src="{{ asset('images/discord-privacy-settings.gif') }}" style="max-width: 80%"
+                                     alt="How to change the privacy settings on Discord"/>
+                            </div>
+                            <p>
+                                Once they made the change, you can safely retry to send the remaining messages. When the
+                                draw is finished,
+                                they can of course re-disable this setting as they wish.
+                            </p>
+                        </details>
+                    </li>
+                    <li>
+                        <details id="invalid-user">
+                            <summary>
+                                <h3>
+                                    <p><a href="#invalid-user"><i class="fas fa-link"></i></a>Why did someone receive
+                                        <code>@invalid-user</code> as the person to
+                                        gift?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                This is due to a known bug of the Discord Android application. The workaround is to open
+                                the
+                                conversation on the Discord desktop app (for Windows, MacOS or Linux) or on the website.
+                            </p>
+                        </details>
+                    </li>
+                </ul>
+
+                <h2>Miscellaneous</h2>
+
+                <ul>
+                    <li>
+                        <details id="hall-of-fame">
+                            <summary>
+                                <h3>
+                                    <p><a href="#hall-of-fame"><i class="fas fa-link"></i></a>How can I add my company /
+                                        organization to your Hall of Fame?</p>
+                                </h3>
+                            </summary>
+                            <p>
+                                Simply drop us an email at <a
+                                        href="mailto:hello@wysiwyl.team">hello@wysiwyl.team</a>
+                                with the name, url and logo of the entity you want to add. It's free but if you want to
+                                tweet
+                                or share our app to the world, you are more than welcome.
+                            </p>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" nonce="{{ csp_nonce('script') }}">
+        let details = ''
+        function openTarget() {
+            let hash = location.hash.substring(1);
+            if (hash) {
+                details = document.getElementById(hash);
+            }
+            if (details && details.tagName.toLowerCase() === 'details') {
+                details.open = true;
+            }
+        }
+
+        window.addEventListener('hashchange', openTarget);
+        openTarget();
+    </script>
+{% endblock content %}
+{% block contact %}
+    <a href="mailto:hello@wysiwyl.team" class="support-link"><i class="fas fa-envelope"></i> Did not find an answer
+        to your question? Contact us!</a>
+{% endblock contact %}
