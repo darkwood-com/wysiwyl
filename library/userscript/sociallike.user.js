@@ -35,7 +35,7 @@
             return [...readSelector].map(element => element.querySelectorAll([
                 '[role="button"][data-testid="like"]', // twitter
                 '.file-page__video button.button-like:not(.button--fire)', // odysee
-                '#below #segmented-like-button button[aria-pressed="false"]', // youtube
+                '#below .YtLikeButtonViewModelHost button[aria-pressed="false"]', // youtube
                 '.js-social-container:not(.on) .unstarred .js-social-form .btn.btn-sm:not(.btn-primary)', // github
                 '.share button:not(.active)', // esa
                 '.feed-shared-social-actions button[aria-pressed="false"]', // linkedin
