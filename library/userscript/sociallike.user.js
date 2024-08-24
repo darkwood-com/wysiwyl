@@ -34,8 +34,9 @@
         likeSelector(readSelector) {
             return [...readSelector].map(element => element.querySelectorAll([
                 '[role="button"][data-testid="like"]', // twitter
-                '.file-page__video button.button-like:not(.button--fire)', // odysee
-                '#below #segmented-like-button button[aria-pressed="false"]', // youtube
+                '.file-page__video .media__actions button.button-like:not(.button--fire)', // odysee
+                '#below .YtLikeButtonViewModelHost button[aria-pressed="false"]', // youtube videos
+                'ytd-reel-video-renderer[is-active] ytd-toggle-button-renderer#like-button yt-button-shape button.yt-spec-button-shape-next[aria-pressed="false"]', // youtube shorts
                 '.js-social-container:not(.on) .unstarred .js-social-form .btn.btn-sm:not(.btn-primary)', // github
                 '.share button:not(.active)', // esa
                 '.feed-shared-social-actions button[aria-pressed="false"]', // linkedin
@@ -46,6 +47,7 @@
                 'article', // twitter
                 '.file-page__video', // odysee
                 '#primary-inner', // youtube
+                '#shorts-container', // youtube
                 '.js-repo-pjax-container', // github
                 '.article', // esa
                 '.feed-shared-update-v2__description-wrapper', // linkedin
